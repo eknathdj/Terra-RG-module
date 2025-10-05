@@ -12,17 +12,14 @@ variable "m_environment_tag" {
     - `d` for development
     - `t` for test
     - `q` for qualification
-    - `i` for integration
-    - `s` for staging or pre-production
     - `p` for production
-    - `y` for playground
     - `m` for mutualized resource
   EOF
   default     = "d"
 
   validation {
-    condition     = contains(["d", "t", "q", "i", "s", "p", "y", "m"], lower(var.m_environment_tag))
-    error_message = "Unsupported environment tag specified. Supported values: 'd','t','q','i','s','p','y','m'."
+    condition     = contains(["d", "t", "q", "p", "m"], lower(var.m_environment_tag))
+    error_message = "Unsupported environment tag specified. Supported values: 'd','t','q','p','m'."
   }
 }
 
