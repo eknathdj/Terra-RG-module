@@ -19,19 +19,17 @@ variable "m_tags" {
 variable "m_environment_tag" {
   type        = string
   description = <<-EOF
-The environment tag to be used while naming the provisioned resources. The list of possible values are as follows:
-- `d` for development
-- `t` for test
-- `q` for qualification
-- `i` for integration
-- `s` for staging or pre-production
-- `p` for production
-- `y` for playground
-- `m` for mutualized resource
-EOF
+    The environment tag used while labeling provisioned resources. Allowed values:
+    - `d` for development
+    - `t` for test
+    - `q` for qualification
+    - `p` for production
+    - `m` for mutualized resource
+  EOF
   default     = "d"
+
   validation {
-    condition     = contains(["d", "t", "q", "i", "s", "p", "y", "m"], lower(var.m_environment_tag))
-    error_message = "Unsupported environment tag specified. Supported environments are: 'd', 't', 'q', 'i', 's', 'p', 'y' and 'm'."
+    condition     = contains(["d", "t", "q", "p", "m"], lower(var.m_environment_tag))
+    error_message = "Unsupported environment tag specified. Supported values: 'd','t','q','p','m'."
   }
 }
